@@ -7,14 +7,29 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function viewAll(Request $request) {
-        $posts = Post::paginate(12);
+    public function viewAllPublic(Request $request)
+    {
+        $posts = Post::where('online', 1)->paginate(12);
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $view = view('child', compact('posts'))->render();
-            return response()->json(['html'=>$view]);
+            return response()->json(['html' => $view]);
         }
         return view("gallery", compact("posts"));
-
     }
+
+    public function viewPublicPost($id)
+    {
+        try {
+            $product= Post::where('online',1)
+                ->where('id', $id)
+                ->firstOrFail();
+            
+        } catch (\Exception $e) {
+            return abort(404);
+        }
+    }
+
+
+    
 }

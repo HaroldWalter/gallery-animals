@@ -20,8 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/post', [PostController::class, 'viewAll'])->name('gallery');
-Route::get('/post/details', [PostController::class, 'detail'])->name('detail');
+Route::get('/post', [PostController::class, 'viewAllPublic'])->name('gallery');
+Route::get('/post/details', [PostController::class, 'viewPublicPost'])->name('detail');
 
 // Routes réservés aux utilisateurs connecté
 Route::middleware(['auth', 'verified'])->group(function () {
