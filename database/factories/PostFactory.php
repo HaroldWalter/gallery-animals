@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'image',
+            'image' => public_path('images/test.jpg'),
             'description' => fake()->text(),
             'user_id' => User::all()->count() ? User::all()->random()->id : 0,
             'online' => true,
