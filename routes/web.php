@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/post/delete/{id}', [PostController::class, "destroy"])->name('post.destroy');
 });
 
-
+// Gestion des fichiers
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], function () {
+    Lfm::routes();
+});
 
 // Routes liés à l'inscription et la connexion des utilisateurs
 Route::get('/dashboard', function () {

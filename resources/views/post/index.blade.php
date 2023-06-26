@@ -6,7 +6,7 @@
 
 @section('content')
     <div id="post-data">
-        @include('child')
+        @include('post.child')
     </div>
 
     <div class="ajax-load" style="display:none">

@@ -12,10 +12,10 @@ class PostController extends Controller
         $posts = Post::where('online', 1)->paginate(12);
 
         if ($request->ajax()) {
-            $view = view('child', compact('posts'))->render();
+            $view = view('post.child', compact('posts'))->render();
             return response()->json(['html' => $view]);
         }
-        return view("gallery", compact("posts"));
+        return view("post.index", compact("posts"));
     }
 
     public function viewPublicPost($id)

@@ -8,7 +8,7 @@
     @yield('css')
     <title>{{ config('app.name', "Un simple blog d'animaux") }} - @yield('title')</title>
 
-    @vite(['resources/css/app.css', 'ressources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
