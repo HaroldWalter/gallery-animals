@@ -1,43 +1,44 @@
 @extends('layouts.layouthf')
 
-@section('title')
-    {{ 'Gallerie' }}
-@endsection
+@section('main')
 
-@section('content')
-    <div id="post-data">
-        @include('post.child')
+@isset($title)
+<div class="row">
+    <div class="column">
+        <h1>{!! $title !!}</h1>
+    </div>
+</div>
+@endisset
+
+<div class="s-bricks">
+
+    <div class="masonry">
+        <div class="bricks-wrapper h-group">
+
+            <div class="grid-sizer"></div>
+
+            <div class="lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            @foreach($posts as $post)
+
+            <x-post.brick :post="$post" />
+
+            @endforeach
+
+        </div>
+
     </div>
 
-    <div class="ajax-load" style="display:none">
-        <p>loading...</p>
+    <div class="row">
+        <div class="column large-12">
+            {{ $posts->links('post.pagination') }}
+        </div>
     </div>
 
-    <script type="text/javascript">
-        var page = 1;
-        $(window).scroll(function() {
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                page++;
-                loadMoreData(page);
-            }
-        });
+</div>
 
-        function loadMoreData(page) {
-            $.ajax({
-                    url: '?page=' + page,
-                    type: "get",
-                    beforeSend: function() {
-                        $('.ajax-load').show();
-                    }
-                })
-                .done(function(data) {
-                    if (data.html == " ") {
-                        $('.ajax-load').html("No records!");
-                        return;
-                    }
-                    $('.ajax-load').hide();
-                    $("#post-data").append(data.html);
-                })
-        }
-    </script>
 @endsection

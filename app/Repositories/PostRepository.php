@@ -14,7 +14,7 @@ class PostRepository
          'image',
          'user_id',
       )
-         ->with('user:id,name')
+         ->with('users:id,name')
          ->whereOnline(true);
    }
 
@@ -26,5 +26,40 @@ class PostRepository
    public function getOnlineOrderByDate($nbrPages)
    {
       return $this->queryOnlineOrderByDate()->paginate($nbrPages);
+   }
+
+   public function getPostById($id)
+   {
+      $post = Post::with(
+         'users:id,name',
+         'tags:id,tag',
+      )
+         ->withCount('validComments')
+         ->whereId($id)
+         ->firstOrFail();
+
+      // Previous post
+      $post->previous = $this->getPreviousPost($post->id);
+
+      // Next post
+      $post->next = $this->getNextPost($post->id);
+
+      return $post;
+   }
+
+   protected function getPreviousPost($id)
+   {
+      return Post::select('title', 'id')
+         ->whereOnline(true)
+         ->latest('id')
+         ->firstWhere('id', '<', $id);
+   }
+
+   protected function getNextPost($id)
+   {
+      return Post::select('title', 'id')
+         ->whereOnline(true)
+         ->oldest('id')
+         ->firstWhere('id', '>', $id);
    }
 }

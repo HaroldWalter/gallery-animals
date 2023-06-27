@@ -16,7 +16,7 @@ class Comment extends Model
         'post_id',
     ];
 
-    public function owner(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

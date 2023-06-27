@@ -25,7 +25,7 @@ class Post extends Model
     ];
 
 
-    public function owner(): BelongsTo
+    public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -37,7 +37,7 @@ class Post extends Model
 
     public function validComments()
     {
-        return $this->comments()->whereHas('user', function ($query){
+        return $this->comments()->whereHas('users', function ($query){
             $query->whereValid(true);
         });
     }

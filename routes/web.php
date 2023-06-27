@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
+use App\Http\Controllers\Front\PostController as FrontPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,10 @@ use UniSharp\LaravelFilemanager\Lfm;
 // Les pages accessibles à tous
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::get('/post', [PostController::class, 'viewAllPublic'])->name('gallery');
-Route::get('/post/details', [PostController::class, 'viewPublicPost'])->name('detail');
+Route::get('/post', [FrontPostController::class, 'index'])->name('gallery');
+Route::get('/post/detail/{id}', [FrontPostController::class, 'show'])->name('detail');
 
 // Routes réservés aux utilisateurs connecté
 Route::middleware(['auth', 'verified'])->group(function () {
