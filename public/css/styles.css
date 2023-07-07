@@ -3427,8 +3427,8 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * ------------------------------------------------------------------- */
 .s-header {
     --header-height: 8.8rem;
-    --logo-width: 96px;
-    --logo-height: 24px;
+    --logo-width: 70px;
+    --logo-height: 60px;
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -4565,6 +4565,10 @@ body.search-is-visible {
     position: -webkit-sticky;
     position: sticky;
     top: 4rem;
+}
+
+.s-content__pagenav {
+    padding-top: 10px;
 }
 
 /* entry meta

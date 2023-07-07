@@ -10,16 +10,16 @@
 
     <div class="entry__text">
         <div class="entry__header">
-            <h1 class="entry__title"><a href="#">{{ $post->title }}</a></h1>
+            <h2 class="entry__title"><a href="{{ route('detail', $post->id) }}">{{ $post->title }}</a></h2>
             <div class="entry__meta">
                 <span class="byline"">@lang('By:')
-                  <span class='author'>
-                      <a href=" #">{{ $post->users->name }}</a>
+                    <span class='author'>
+                        {{ $post->users->name }}
                 </span>
                 </span>
             </div>
         </div>
-        <a class="entry__more-link" href="#">@lang('Look at')</a>
-    </div>
+        <a class=" entry__more-link" href="{{ route('detail', $post->id) }}">@lang('Look at')</a>
+            </div>
 
 </article>

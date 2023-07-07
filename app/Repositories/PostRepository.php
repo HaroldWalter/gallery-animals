@@ -62,4 +62,22 @@ class PostRepository
          ->oldest('id')
          ->firstWhere('id', '>', $id);
    }
+
+   public function getOnlineOrderByDateForTag($nbrPages, $tag_id)
+   {
+      return $this->queryOnlineOrderByDate()
+         ->whereHas('tags', function ($q) use ($tag_id) {
+            $q->where('tags.id', $tag_id);
+         })->paginate($nbrPages);
+   }
+
+   public function search($n, $search)
+   {
+      return $this->queryOnlineOrderByDate()
+         ->where(function ($q) use ($search) {
+            $q->where('tag', 'like', "%$search%")
+               ->orWhere('user', 'like', "%$search%")
+               ->orWhere('title', 'like', "%$search%");
+         })->paginate($n);
+   }
 }

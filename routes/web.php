@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
 use App\Http\Controllers\Front\PostController as FrontPostController;
+use App\Http\Controllers\Front\CommentController as FrontCommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ Route::get('/', function () {
 
 Route::get('/post', [FrontPostController::class, 'index'])->name('gallery');
 Route::get('/post/detail/{id}', [FrontPostController::class, 'show'])->name('detail');
+
+Route::get('tag/{tag:id}', [FrontPostController::class, 'tag'])->name('tag');
+
+ Route::get('{post}/comments', [FrontCommentController::class, 'comments'])->name('post.comments');
 
 // Routes réservés aux utilisateurs connecté
 Route::middleware(['auth', 'verified'])->group(function () {

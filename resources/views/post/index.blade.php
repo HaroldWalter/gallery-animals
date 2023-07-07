@@ -2,10 +2,16 @@
 
 @section('main')
 
-@isset($title)
+@if(isset($title))
 <div class="row">
     <div class="column">
         <h1>{!! $title !!}</h1>
+    </div>
+</div>
+@else
+<div class="row">
+    <div class="column">
+        <h1>Walter & Animaux</h1>
     </div>
 </div>
 @endisset

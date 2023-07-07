@@ -14,7 +14,7 @@
             <h1 class="s-content__title s-content__title--post">{{ $post->title }}</h1>
          </div>
          <section class="row">
-            <div class="column large-8">
+            <div class="column large-10">
                <div class="s-content__media">
                   <div class="s-content__post-thumb">
                      <img src="{{ getImage($post) }}" alt="{{$post->title}}" style="width:100%">
@@ -45,7 +45,7 @@
                   <div class="entry-author meta-blk">
                      <div class="byline">
                         <span class="bytext">@lang('Posted By')</span>
-                        <a href="#0">{{ $post->users->name }}</a>
+                        {{ $post->users->name }}
                      </div>
                   </div>
 
@@ -66,7 +66,7 @@
                      <div class="entry-tags meta-blk">
                         <span class="tagtext">@lang('Tags')</span>
                         @foreach($post->tags as $tag)
-                        <a href="#">{{ $tag->tag }}</a>
+                        <a href="{{route('tag', $tag->id)}}">{{ $tag->tag }}</a>
                         @endforeach
                      </div>
 
@@ -89,6 +89,30 @@
                </div>
          </section>
 
+
+         
+
+         <!-- comments
+================================================== -->
+         <section class="comments-wrap">
+
+            <div id="comments" class="row">
+               <div id="commentsList" class="column large-12">
+
+                  @if($post->valid_comments_count > 0)
+                  <div id="forShow">
+                     <p id="showbutton" class="text-center">
+                        <a id="showcomments" href="{{ route('post.comments', $post->id) }}" class="btn h-full-width">@lang('Show comments')</a>
+                     </p>
+                     <p id="showicon" class="h-text-center" hidden>
+                        <span class="fa fa-spinner fa-pulse fa-3x fa-fw"></span>
+                     </p>
+                  </div>
+                  @endif
+
+               </div>
+            </div>
+         </section>
 
          <section class="s-content__pagenav row">
             @isset($post->previous)

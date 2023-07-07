@@ -40,10 +40,10 @@
 
     <!-- header
     ================================================== -->
-    <header class="s-header">
+    <header class="s-header s-header--opaque">
         <div class="s-header__logo">
             <a class="logo" href="index.route('home')">
-                <img src="{{asset('images/logo.svg')}}" alt="Homepage" />
+                <img src="{{asset('images/logo.webp')}}" alt="Homepage" />
             </a>
         </div>
 
@@ -60,6 +60,16 @@
                         <a href="{{route('gallery')}}" title="">@lang('Gallery')</a>
                     </li>
 
+                    <li class="has-children">
+                    <a href="#" title="">@lang('Tags')</a>
+                    <ul class="sub-menu">
+                        @foreach($tags as $tag)
+                        <li><a href="{{ route('tag', $tag->id) }}">{{ $tag->tag }}</a></li>
+                        @endforeach
+                    </ul>
+                    </li>
+                    
+
                     <li><a href="about.html" title="">About</a></li>
                     <li><a href="contact.html" title="">Contact</a></li>
                 </ul>
@@ -73,30 +83,8 @@
 
         <a class="s-header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
 
-        <div class="s-header__search">
-            <div class="s-header__search-inner">
-                <div class="row wide">
-                    <form role="search" method="get" class="s-header__search-form" action="#">
-                        <label>
-                            <span class="h-screen-reader-text">Search for:</span>
-                            <input type="search" class="s-header__search-field" placeholder="Search for..." value="" name="s" title="Search for:" autocomplete="off" />
-                        </label>
-                        <input type="submit" class="s-header__search-submit" value="Search" />
-                    </form>
+        <!-- end row -->
 
-                    <a href="#0" title="Close Search" class="s-header__overlay-close">Close</a>
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- s-header__search-inner -->
-        </div>
-        <!-- end s-header__search wrap -->
-
-        <a class="s-header__search-trigger" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.982 17.983">
-                <path fill="#010101" d="M12.622 13.611l-.209.163A7.607 7.607 0 017.7 15.399C3.454 15.399 0 11.945 0 7.7 0 3.454 3.454 0 7.7 0c4.245 0 7.699 3.454 7.699 7.7a7.613 7.613 0 01-1.626 4.714l-.163.209 4.372 4.371-.989.989-4.371-4.372zM7.7 1.399a6.307 6.307 0 00-6.3 6.3A6.307 6.307 0 007.7 14c3.473 0 6.3-2.827 6.3-6.3a6.308 6.308 0 00-6.3-6.301z" />
-            </svg>
-        </a>
     </header>
     <!-- end s-header -->
 
